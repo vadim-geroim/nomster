@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 body {
   background: image_url('geometry2.png');
@@ -13,6 +14,10 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-inverse .navbar-brand {
   font-family: 'source_sans_proitalic', serif;
   font-size: 26px;
+}
+
+.pagination {
+  padding-bottom: 10px;
 }
 
 .navbar {
