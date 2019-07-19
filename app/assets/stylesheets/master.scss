@@ -11,6 +11,13 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
+.invalid-feedback {
+  color: #ff3333;
+  background-color: #ffEEEE;
+  border-radius: 3px;
+  padding: 2px 8px 2px 8px;
+}
+
 .navbar-inverse .navbar-brand {
   font-family: 'source_sans_proitalic', serif;
   font-size: 26px;
