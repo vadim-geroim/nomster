@@ -42,7 +42,7 @@
 <div class="booyah-box col-10 offset-1">
 	<%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
 		<%= f.input :message %>
-		<%= f.input :rating %>
+		<%= f.input :rating, as: :select, collection: Comment::RATINGS %>
 		<%= f.submit "Add comment", class: 'btn btn-primary' %>
 	<% end %>
 </div>
@@ -50,7 +50,9 @@
 <% @place.comments.each do |comment| %>
 	<div class="booyah-box col-10 offset-1">
 		<blockquote>
-			<b><%= comment.rating %></b> -
+			<% if comment.humanized_rating.present? %>
+				<b><%= comment.humanized_rating %></b> -
+			<% end %>
 				 <%= comment.message %>
 			<small><%= comment.user.email %></small>	 
 		</blockquote>
