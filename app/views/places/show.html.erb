@@ -1,10 +1,11 @@
+<!-- Place details  -->
 <div class="booyah-box col-10 offset-1">
 	<h1><%= @place.name %></h1>
 	<br />
 	<i><%= @place.address %></i>
 	<br /><br />
 	<p><%= @place.description %></p>
-
+	<!-- Google map -->
 	<% if @place.latitude.present? && @place.longitude.present? %>
 	  <script>
 
@@ -29,6 +30,7 @@
 	  <div id="map"></div>
 	<% end %>
 	<br />
+	<!-- Buttons Edit and Delete -->
 	<div class="float-right">
 		<% if current_user && current_user == @place.user %>
 			<%= link_to 'Edit', edit_place_path, class: 'btn btn-primary' %>
@@ -39,14 +41,35 @@
 	<br />
 </div>
 <div class="clear"></div>
-<div class="booyah-box col-10 offset-1">
-	<%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
-		<%= f.input :message %>
-		<%= f.input :rating, as: :select, collection: Comment::RATINGS %>
-		<%= f.submit "Add comment", class: 'btn btn-primary' %>
-	<% end %>
-</div>
 <h1 class="col-10 offset-1">Comments</h1>
+<!-- Button trigger modal -->
+<button type="button" class="col-2 offset-1 btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Add comment
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add a Comment</h4>
+      </div>
+      <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
+        <div class="modal-body">
+					<%= f.input :message %>
+					<%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+      	</div>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        	<%= f.submit "Add your Comment", class: 'btn btn-primary' %>
+      	</div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Comments -->
 <% @place.comments.each do |comment| %>
 	<div class="booyah-box col-10 offset-1">
 		<blockquote>
@@ -58,4 +81,12 @@
 		</blockquote>
 	</div>	
 <% end %>
+
+
+
+
+
+
+
+
 
