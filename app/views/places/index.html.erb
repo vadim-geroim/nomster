@@ -7,22 +7,22 @@
   </ol>
   <div class="mh-75 carousel-inner" role="listbox">
     <div class="mh-50 carousel-item active">
-    	<%= image_tag 'slider1.jpg', class: 'd-block img-fluid' %>
-    	<div class="carousel-caption d-none d-md-block">
-    		<h3>Thinking about vacation?</h3>
-    	</div>
+      <%= image_tag 'slider1.jpg', class: 'd-block img-fluid' %>
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Thinking about vacation?</h3>
+      </div>
     </div>
     <div class="carousel-item">
       <%= image_tag 'slider2.jpg', class: 'd-block img-fluid' %>
-    	<div class="carousel-caption d-none d-md-block">
-    		<h3>Find the best places to travel</h3>
-    	</div>
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Find the best places to travel</h3>
+      </div>
     </div>
     <div class="carousel-item">
-    	<%= image_tag 'slider3.jpg', class: 'd-block img-fluid' %>
-    	<div class="carousel-caption d-none d-md-block">
-    		<h3>Let your dream come true</h3>
-    	</div>	
+      <%= image_tag 'slider3.jpg', class: 'd-block img-fluid' %>
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Let your dream come true</h3>
+      </div>  
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -37,30 +37,30 @@
 
 
 <% @places.each do |place| %>
-	<div class="booyah-box col-10 offset-1">
-		<h1><%= link_to place.name, place_path(place) %></h1>
-		<br />
-		<i><%= place.address %></i><br /><br />
-		<p><%= place.description %></p><br />
-		<% if place.user.present? %>
-			<small><%= place.user.email %></small>
-		<% end %>
-	<!-- The last place's comment -->
-	<% if place.comments.present? %>
-		<div class="col-12">
-			<blockquote>
-				<% if place.comments.last.humanized_rating.present? %>
-					<b><%= place.comments.last.humanized_rating %></b> -
-				<% end %>
-					 <%= place.comments.last.message %>
-				<small><%= place.comments.last.user.email %></small>	 
-			</blockquote>
-		</div>	
-	<% end %>
-	</div>	
+  <div class="booyah-box col-10 offset-1">
+    <h1><%= link_to place.name, place_path(place) %></h1>
+    <br />
+    <i><%= place.address %></i><br /><br />
+    <p><%= place.description %></p><br />
+    <% if place.user.present? %>
+      <small><%= place.user.email %></small>
+    <% end %>
+  <!-- The last place's comment -->
+  <% if place.comments.present? %>
+    <div class="col-12">
+      <blockquote>
+        <% if place.comments.last.humanized_rating.present? %>
+          <b><%= place.comments.last.humanized_rating %></b> -
+        <% end %>
+           <%= place.comments.last.message %>
+        <small><%= place.comments.last.user.email %></small>   
+      </blockquote>
+    </div>  
+  <% end %>
+  </div>  
 <% end %>
 
 <div class="pagination col-2 offset-1">
-	<%= will_paginate @places %>
-</div>	
+  <%= will_paginate @places %>
+</div>  
 

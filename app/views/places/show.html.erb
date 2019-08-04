@@ -1,60 +1,60 @@
 <!-- Place details  -->
 <div class="booyah-box col-10 offset-1">
-	<h1><%= @place.name %></h1>
-	<br />
-	<i><%= @place.address %></i>
-	<br /><br />
-	<p><%= @place.description %></p>
-	<!-- Google map -->
-	<% if @place.latitude.present? && @place.longitude.present? %>
-	  <script>
+  <h1><%= @place.name %></h1>
+  <br />
+  <i><%= @place.address %></i>
+  <br /><br />
+  <p><%= @place.description %></p>
+  <!-- Google map -->
+  <% if @place.latitude.present? && @place.longitude.present? %>
+    <script>
 
-	    function initMap() {
-	      var myLatLng = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
+      function initMap() {
+        var myLatLng = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
 
-	      var map = new google.maps.Map(document.getElementById('map'), {
-	        zoom: 12,
-	        center: myLatLng
-	      });
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: myLatLng
+        });
 
-	      var marker = new google.maps.Marker({
-	        position: myLatLng,
-	        map: map,
-	        title: 'Hello World!'
-	      });
-	    }
-	  </script>
-	  <script async defer
-	  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GEOCODER_API_KEY'] %>&callback=initMap">
-	  </script>
-	  <div id="map"></div>
-	<% end %>
-	<br />
-	<!-- Buttons Add Photo, Edit and Delete -->
-	<div class="float-right">
-		<% if current_user && current_user == @place.user %>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoModal">
-			  Add photo
-			</button>
-			<%= link_to 'Edit', edit_place_path, class: 'btn btn-primary' %>
-			<%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger'%>
-		<% end %>
-	</div>
-	<br />
-	<br />
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GEOCODER_API_KEY'] %>&callback=initMap">
+    </script>
+    <div id="map"></div>
+  <% end %>
+  <br />
+  <!-- Buttons Add Photo, Edit and Delete -->
+  <div class="float-right">
+    <% if current_user && current_user == @place.user %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photoModal">
+        Add photo
+      </button>
+      <%= link_to 'Edit', edit_place_path, class: 'btn btn-primary' %>
+      <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger'%>
+    <% end %>
+  </div>
+  <br />
+  <br />
 </div>
 <div class="clear"></div>
 <br />
 <div class="col-10 offset-1">
-	<h1 class="float-left">Comments</h1>
-	<!-- Button trigger modal -->
-	<% if current_user %>
-		<button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
-		  Add comment
-		</button>
-	<% end %>
-	<div class="clear">
-	</div>	
+  <h1 class="float-left">Comments</h1>
+  <!-- Button trigger modal -->
+  <% if current_user %>
+    <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
+      Add comment
+    </button>
+  <% end %>
+  <div class="clear">
+  </div>  
 </div>
 <br />
 <!-- Modal -->
@@ -69,30 +69,30 @@
       </div>
       <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
         <div class="modal-body">
-					<%= f.input :message %>
-					<%= f.input :rating, as: :select, collection: Comment::RATINGS %>
-      	</div>
-      	<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        	<%= f.submit "Add your Comment", class: 'btn btn-primary' %>
-      	</div>
+          <%= f.input :message %>
+          <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add your Comment", class: 'btn btn-primary' %>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
 <!-- Comments -->
 <div class="row">
-	<% @place.comments.each do |comment| %>
-		<div class="col-12 col-sm-5 offset-sm-1">
-			<blockquote>
-				<% if comment.humanized_rating.present? %>
-					<b><%= comment.humanized_rating %></b> -
-				<% end %>
-					 <%= comment.message %>
-				<small><%= comment.user.email %></small>	 
-			</blockquote>
-		</div>	
-	<% end %>
+  <% @place.comments.each do |comment| %>
+    <div class="col-12 col-sm-5 offset-sm-1">
+      <blockquote>
+        <% if comment.humanized_rating.present? %>
+          <b><%= comment.humanized_rating %></b> -
+        <% end %>
+           <%= comment.message %>
+        <small><%= comment.user.email %></small>   
+      </blockquote>
+    </div>  
+  <% end %>
 </div>
 <!-- Modal Add Photo -->
 <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
@@ -105,30 +105,30 @@
         </button>
       </div>
       <%= simple_form_for @photo, url:  place_photos_path(@place) do |f| %>
-		    <div class="modal-body">
-					<%= f.input :caption %>
-					<%= f.input :picture %>
-		    </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <%= f.submit 'Add your Photo', class: 'btn btn-primary' %>
-	      </div>
+        <div class="modal-body">
+          <%= f.input :caption %>
+          <%= f.input :picture %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit 'Add your Photo', class: 'btn btn-primary' %>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
 <br />
-<% unless @place.photos.empty? %>	
-	<div class="col-10 offset-1">
-		<div class="row">
-			<% @place.photos.each do |photo| %>
-					<div class="col-4">
-	        	<p class="text-center text-style"><%= photo.caption %></p>
-					  <%= image_tag(photo.picture.url, class: 'img-fluid') %>
-	    		</div>
-			<% end %>
-		</div>
-	</div>	
+<% unless @place.photos.empty? %> 
+  <div class="col-10 offset-1">
+    <div class="row">
+      <% @place.photos.each do |photo| %>
+          <div class="col-4">
+            <p class="text-center text-style"><%= photo.caption %></p>
+            <%= image_tag(photo.picture.url, class: 'img-fluid') %>
+          </div>
+      <% end %>
+    </div>
+  </div>  
 <% end %>
 <br />
 <br />
