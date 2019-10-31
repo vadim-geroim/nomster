@@ -2,6 +2,20 @@
 
 This README document steps are necessary to get the application up and running.
 
+## Wireframes
+
+Places page
+![Screenshot](/app/assets/images/places_page.png)
+____________________________________________________________________________________________________________________________
+
+Add-a-Place Form
+![Screenshot](/app/assets/images/add_place_form.png)
+____________________________________________________________________________________________________________________________
+
+Profile page
+![Screenshot](/app/assets/images/profile_page.png)
+____________________________________________________________________________________________________________________________
+
 ## Precondition 
 * Ruby version 2.5.3 installed
 * Ruby on Rails version 5.2.3 installed
